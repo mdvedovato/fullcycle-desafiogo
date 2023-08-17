@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  laravel:
+    build: 
+      context: ./laravel
+      dockerfile: Dockerfile.prod
+    image: mvedovato/laravel:prod
+    container_name: laravel
+    networks:
+      - laranet:bridge
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod  
+    image: mvedovato/nginx:prod
+    networks:
+      - laranet:bridge
+    ports:
+      - "8080:80"
